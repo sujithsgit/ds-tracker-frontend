@@ -1,0 +1,502 @@
+// Variables (matching the dashboard theme)
+$color-primary: #7FA990;
+$color-primary-light: #8FB89E;
+$color-primary-lighter: #D4E5DC;
+$color-primary-lightest: #E8F0EB;
+$color-bg: #F8FAF9;
+$color-white: #FFFFFF;
+$color-text: #2D3E36;
+$color-text-light: #6B8575;
+$color-border: #E0E9E4;
+$color-input-bg: #F8FAF9;
+
+$font-body: 'Manrope', 'Avenir', sans-serif;
+
+$shadow-sm: 0 2px 8px rgba(127, 169, 144, 0.08);
+$shadow-md: 0 4px 16px rgba(127, 169, 144, 0.12);
+$shadow-xl: 0 20px 60px rgba(45, 62, 54, 0.15);
+
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+
+$transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+// Modal Overlay
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(45, 62, 54, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+// Modal Content
+.modalContent {
+  background: $color-white;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-xl;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease-out;
+  font-family: $font-body;
+}
+
+// Modal Header
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px;
+  border-bottom: 1px solid $color-border;
+}
+
+.modalTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: $color-text;
+  margin: 0;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: $color-text-light;
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-sm;
+  transition: $transition;
+  
+  &:hover {
+    background: $color-primary-lightest;
+    color: $color-primary;
+  }
+}
+
+// Modal Body
+.modalBody {
+  padding: 28px;
+  overflow-y: auto;
+  flex: 1;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: $color-bg;
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $color-border;
+    border-radius: 3px;
+    
+    &:hover {
+      background: $color-primary-lighter;
+    }
+  }
+}
+
+// Form Group
+.formGroup {
+  margin-bottom: 24px;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: $color-text;
+  margin-bottom: 10px;
+}
+
+// Input
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  font-size: 15px;
+  color: $color-text;
+  background: $color-input-bg;
+  transition: $transition;
+  font-family: $font-body;
+  
+  &::placeholder {
+    color: $color-text-light;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+    background: $color-white;
+    box-shadow: 0 0 0 3px rgba(127, 169, 144, 0.1);
+  }
+}
+
+// Duration Options
+.durationOptions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.durationButton {
+  padding: 10px 20px;
+  border: 2px solid $color-border;
+  background: $color-white;
+  border-radius: $radius-sm;
+  font-size: 14px;
+  font-weight: 500;
+  color: $color-text;
+  cursor: pointer;
+  transition: $transition;
+  font-family: $font-body;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  
+  &:hover {
+    border-color: $color-primary-lighter;
+    background: $color-primary-lightest;
+  }
+  
+  &.active {
+    background: $color-primary;
+    border-color: $color-primary;
+    color: $color-white;
+    font-weight: 600;
+  }
+}
+
+.checkIcon {
+  margin-left: 4px;
+}
+
+.orText {
+  font-size: 13px;
+  color: $color-text-light;
+  font-style: italic;
+  margin: 0 4px;
+}
+
+.customSelect {
+  padding: 10px 14px;
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  font-size: 14px;
+  color: $color-text;
+  background: $color-white;
+  cursor: pointer;
+  transition: $transition;
+  font-family: $font-body;
+  
+  &:hover {
+    border-color: $color-primary-lighter;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+    box-shadow: 0 0 0 3px rgba(127, 169, 144, 0.1);
+  }
+}
+
+// Reminder Row
+.reminderRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+// Toggle Switch
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
+  cursor: pointer;
+  
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    
+    &:checked + .slider {
+      background: $color-primary;
+      
+      &:before {
+        transform: translateX(24px);
+      }
+    }
+  }
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $color-border;
+  border-radius: 14px;
+  transition: $transition;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background: $color-white;
+    border-radius: 50%;
+    transition: $transition;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  &:hover {
+    background: $color-primary-lighter;
+  }
+}
+
+// Time Input
+.timeInput {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  font-size: 14px;
+  color: $color-text;
+  background: $color-input-bg;
+  transition: $transition;
+  font-family: $font-body;
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  &:focus:not(:disabled) {
+    outline: none;
+    border-color: $color-primary;
+    background: $color-white;
+    box-shadow: 0 0 0 3px rgba(127, 169, 144, 0.1);
+  }
+}
+
+// Icon Button
+.iconButton {
+  width: 40px;
+  height: 40px;
+  border: 1px solid $color-border;
+  background: $color-white;
+  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: $transition;
+  color: $color-text-light;
+  flex-shrink: 0;
+  
+  &:hover {
+    background: $color-primary-lightest;
+    border-color: $color-primary;
+    color: $color-primary;
+  }
+  
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+// Date Input
+.dateInputWrapper {
+  display: flex;
+  gap: 12px;
+}
+
+.dateInput {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  font-size: 14px;
+  color: $color-text;
+  background: $color-input-bg;
+  transition: $transition;
+  font-family: $font-body;
+  
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+    background: $color-white;
+    box-shadow: 0 0 0 3px rgba(127, 169, 144, 0.1);
+  }
+}
+
+// Textarea
+.textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  font-size: 14px;
+  color: $color-text;
+  background: $color-input-bg;
+  transition: $transition;
+  font-family: $font-body;
+  resize: vertical;
+  min-height: 100px;
+  
+  &::placeholder {
+    color: $color-text-light;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+    background: $color-white;
+    box-shadow: 0 0 0 3px rgba(127, 169, 144, 0.1);
+  }
+}
+
+// Modal Footer
+.modalFooter {
+  display: flex;
+  gap: 12px;
+  padding: 20px 28px;
+  border-top: 1px solid $color-border;
+  background: $color-bg;
+}
+
+.cancelButton {
+  flex: 1;
+  padding: 12px 24px;
+  border: 2px solid $color-border;
+  background: $color-white;
+  border-radius: $radius-sm;
+  font-size: 15px;
+  font-weight: 600;
+  color: $color-text;
+  cursor: pointer;
+  transition: $transition;
+  font-family: $font-body;
+  
+  &:hover {
+    background: $color-primary-lightest;
+    border-color: $color-primary;
+    color: $color-primary;
+  }
+}
+
+.createButton {
+  flex: 1;
+  padding: 12px 24px;
+  border: none;
+  background: $color-primary;
+  border-radius: $radius-sm;
+  font-size: 15px;
+  font-weight: 600;
+  color: $color-white;
+  cursor: pointer;
+  transition: $transition;
+  font-family: $font-body;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  
+  &:hover {
+    background: darken($color-primary, 5%);
+    box-shadow: $shadow-md;
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive
+@media (max-width: 576px) {
+  .modalContent {
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+  
+  .modalHeader,
+  .modalBody,
+  .modalFooter {
+    padding: 20px;
+  }
+  
+  .durationOptions {
+    flex-direction: column;
+    align-items: stretch;
+    
+    .durationButton,
+    .customSelect {
+      width: 100%;
+    }
+    
+    .orText {
+      text-align: center;
+    }
+  }
+  
+  .modalFooter {
+    flex-direction: column;
+    
+    .cancelButton,
+    .createButton {
+      width: 100%;
+    }
+  }
+}

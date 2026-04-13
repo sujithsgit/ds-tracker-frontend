@@ -1,0 +1,87 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: white;
+    border-radius: 16px;
+    width: 520px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 24px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    h2 { font-size: 20px; color: #2D4A3E; }
+}
+
+.closeBtn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.resolutionItem {
+    border: 1px solid #E8F0EB;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.resolutionTop {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.index { color: #999; font-size: 14px; }
+.title { flex: 1; font-size: 16px; font-weight: 600; color: #2D4A3E; }
+
+.badge {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.doneBadge { background: #E8F5E9; color: #4CAF50; }
+.skippedBadge { background: #FFF3E0; color: #FF9800; }
+.pendingBadge { background: #F5F5F5; color: #999; }
+
+.resolutionStats {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.progressBar {
+    height: 6px;
+    background: #E8F0EB;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    background: #7FA990;
+    border-radius: 3px;
+}

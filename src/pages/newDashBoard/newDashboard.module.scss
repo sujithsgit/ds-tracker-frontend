@@ -1,0 +1,1019 @@
+// Import fonts
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+
+// Variables
+$color-primary: #7FA990;
+$color-primary-light: #8FB89E;
+$color-primary-lighter: #D4E5DC;
+$color-primary-lightest: #E8F0EB;
+$color-accent: #F5C563;
+$color-accent-dark: #E8B84D;
+$color-missed: #E89B6B;
+$color-bg: #F8FAF9;
+$color-white: #FFFFFF;
+$color-text: #2D3E36;
+$color-text-light: #6B8575;
+$color-border: #E0E9E4;
+
+$font-display: 'Crimson Pro', 'Georgia', serif;
+$font-body: 'Manrope', 'Avenir', sans-serif;
+
+$shadow-sm: 0 2px 8px rgba(127, 169, 144, 0.08);
+$shadow-md: 0 4px 16px rgba(127, 169, 144, 0.12);
+$shadow-lg: 0 8px 32px rgba(127, 169, 144, 0.15);
+
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 20px;
+
+$transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+// Main app container
+.dashboardApp {
+  min-height: 100vh;
+  background: $color-bg;
+  position: relative;
+  overflow-x: hidden;
+  font-family: $font-body;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Header
+.appHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: $color-white;
+  border-bottom: 1px solid $color-border;
+  position: relative;
+  z-index: 10;
+
+  @media (max-width: 768px) {
+    padding: 16px 20px;
+  }
+}
+
+.appLogo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  svg {
+    animation: float 3s ease-in-out infinite;
+  }
+}
+
+.appName {
+  font-size: 22px;
+  font-weight: 600;
+  color: $color-text;
+  letter-spacing: -0.02em;
+}
+
+.headerActions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btnText {
+  background: none;
+  border: none;
+  color: $color-text-light;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: $radius-sm;
+  transition: $transition;
+  font-family: $font-body;
+
+  &:hover {
+    background: $color-primary-lightest;
+    color: $color-primary;
+  }
+}
+.dateModalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.dateModal {
+    background: white;
+    border-radius: 16px;
+    width: 380px;
+    max-height: 70vh;      // ✅ max height fix
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+
+.dateModalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 12px;
+    border-bottom: 1px solid #f0f0f0;
+    flex-shrink: 0;        // ✅ header fixed
+
+    h3 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #2D4A3E;
+    }
+
+    button {
+        background: none;
+        border: none;
+        font-size: 22px;
+        cursor: pointer;
+        color: #666;
+        line-height: 1;
+    }
+}
+
+.dateModalList {
+    overflow-y: auto;      // ✅ scroll இங்க மட்டும்
+    padding: 12px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    // ✅ Scrollbar style
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+    &::-webkit-scrollbar-track {
+        background: #f0f0f0;
+        border-radius: 2px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #7FA990;
+        border-radius: 2px;
+    }
+}
+
+.dateModalItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    background: #f9fafb;
+    border-radius: 8px;
+}
+
+.dateModalTitle {
+    font-size: 14px;
+    font-weight: 500;
+    color: #2D4A3E;
+    text-transform: capitalize;
+}
+
+.dateModalStatus {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+
+    &.done {
+        background: #e8f5e9;
+        color: #4CAF50;
+    }
+    &.skipped {
+        background: #fff3e0;
+        color: #FF9800;
+    }
+    &.pending {
+        background: #f5f5f5;
+        color: #999;
+    }
+}
+
+
+
+
+
+.btnIcon {
+  background: none;
+  border: none;
+  color: $color-text-light;
+  font-size: 28px;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-sm;
+  transition: $transition;
+  line-height: 1;
+
+  &:hover {
+    background: $color-primary-lightest;
+    color: $color-primary;
+  }
+}
+
+// Main content
+.mainContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 40px;
+  position: relative;
+  z-index: 5;
+
+  @media (max-width: 768px) {
+    padding: 40px 20px;
+  }
+}
+
+.welcomeSection {
+  margin-bottom: 48px;
+  animation: fadeInUp 0.6s ease-out;
+  text-align: left;
+}
+
+.welcomeTitle {
+  font-family: $font-display;
+  font-size: 48px;
+  font-weight: 600;
+  color: $color-text;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+
+  @media (max-width: 768px) {
+    font-size: 36px;
+  }
+}
+
+.checkInItem {
+  margin-bottom: 4px;
+}
+
+.checkInContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.checkInInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.taskLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2D4A3E;
+  text-transform: capitalize;
+}
+
+.dayLabel {
+  font-size: 12px;
+  color: #888;
+}
+
+.checkInActions {
+  display: flex;
+  gap: 8px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #f0f0f0;
+  margin: 0;
+}
+
+.btnDoneDisabled {
+  padding: 6px 14px;
+  background: #e8f5e9;
+  color: #4CAF50;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: not-allowed;
+}
+
+.btnSkipDisabled {
+  padding: 6px 14px;
+  background: #fff3e0;
+  color: #FF9800;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: not-allowed;
+}
+
+.calendarDayPartial {
+  background: #FFF9C4 !important;
+  color: #F57F17 !important;
+  border-radius: 50%;
+  font-weight: 600;
+}
+
+.btnViewAllCheckin {
+
+  padding: 10px;
+  margin-top: 8px;
+  background: #f0f7f4;
+  border: 1.5px dashed #7FA990;
+  border-radius: 8px;
+  color: #7FA990;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #7FA990;
+    color: white;
+    border-style: solid;
+  }
+}
+
+.noResolution {
+  color: #999;
+  font-size: 14px;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.btnViewAll {
+  background: transparent;
+  border: 1.5px solid #7FA990;
+  color: #7FA990;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #7FA990;
+    color: white;
+  }
+}
+
+.welcomeSubtitle {
+  font-size: 18px;
+  color: $color-text-light;
+  font-weight: 400;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+}
+
+// Content Grid
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 24px;
+  margin-bottom: 24px;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.leftColumn,
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+// Card Base Styles
+.resolutionCard,
+.checkInCard,
+.overallProgressCard,
+.calendarCard,
+.streakCard,
+.daysRemainingCard {
+  background: $color-white;
+  border-radius: $radius-lg;
+  padding: 28px;
+  box-shadow: $shadow-sm;
+  transition: $transition;
+  animation: fadeInUp 0.6s ease-out backwards;
+
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: $color-text;
+  margin-bottom: 20px;
+  font-family: $font-body;
+  text-align: left;
+}
+
+// Resolution Card
+.resolutionContent {}
+
+.resolutionTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: $color-text;
+  margin-bottom: 16px;
+  font-family: $font-display;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.resolutionActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.daysProgress {
+  background: $color-primary;
+  color: $color-white;
+  padding: 8px 16px;
+  border-radius: $radius-sm;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.btnAddResolution {
+  background: $color-white;
+  border: 2px solid $color-primary-lighter;
+  color: $color-text;
+  padding: 8px 16px;
+  border-radius: $radius-sm;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: $transition;
+  font-family: $font-body;
+
+  &:hover {
+    background: $color-primary-lightest;
+    border-color: $color-primary;
+  }
+}
+
+.btnCheck {
+  background: $color-primary-lightest;
+  border: none;
+  color: $color-primary;
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: $transition;
+  margin-left: auto;
+
+  &:hover {
+    background: $color-primary;
+    color: $color-white;
+  }
+}
+
+.daysFraction {
+  font-size: 14px;
+  color: $color-text-light;
+  text-align: right;
+  margin-top: 10px;
+}
+
+// Check-In Card
+.checkInContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+
+
+.dayLabel {
+  font-size: 18px;
+  font-weight: 600;
+  color: $color-text;
+  margin-bottom: 4px;
+}
+
+.taskLabel {
+  font-size: 14px;
+  color: $color-text-light;
+}
+
+.checkInActions {
+  display: flex;
+  gap: 12px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.btnMarkDone {
+  background: $color-primary;
+  color: $color-white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: $radius-sm;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: $transition;
+  font-family: $font-body;
+  flex: 1;
+
+  &:hover {
+    background: darken($color-primary, 5%);
+  }
+}
+
+.btnSkip {
+  background: $color-primary-lightest;
+  color: $color-primary;
+  border: none;
+  padding: 12px 24px;
+  border-radius: $radius-sm;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: $transition;
+  font-family: $font-body;
+  flex: 1;
+
+  &:hover {
+    background: $color-primary-lighter;
+  }
+}
+
+// Overall Progress Card
+.progressBarContainer {}
+
+.progressBarFull {
+  height: 12px;
+  background: $color-border;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.progressBarFilled {
+  height: 100%;
+  background: $color-primary;
+  border-radius: 6px;
+  transition: width 0.6s ease;
+}
+
+.progressLegend {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: $color-text-light;
+}
+
+.legendDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+
+  &:first-child {
+    background: $color-primary;
+  }
+
+  &:last-child {
+    background: $color-border;
+  }
+}
+
+.legendBox {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+
+  &:first-child {
+    background: $color-primary;
+  }
+}
+
+// Calendar Card
+.calendarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.calendarMonth {
+  font-weight: 600;
+  color: $color-text;
+  font-size: 16px;
+}
+
+.calendarNav {
+  background: none;
+  border: none;
+  color: $color-text-light;
+  font-size: 18px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-sm;
+  transition: $transition;
+
+  &:hover {
+    background: $color-primary-lightest;
+    color: $color-primary;
+  }
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.calendarDayHeader {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: $color-text-light;
+  padding: 8px 0;
+}
+
+.calendarDay {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-sm;
+  font-size: 13px;
+  font-weight: 500;
+  transition: $transition;
+  cursor: pointer;
+}
+
+.calendarDayCompleted {
+    background: #7FA990 !important;
+    color: white !important;
+    border-radius: 50%;
+    font-weight: 600;
+}
+
+.calendarDayMissed {
+    background: #E57373 !important;
+    color: white !important;
+    border-radius: 50%;
+    font-weight: 600;
+}
+
+.calendarDayPartial {
+    background: #FFD54F !important;
+    color: #5D4037 !important;
+    border-radius: 50%;
+    font-weight: 600;
+}
+
+.calendarDayUpcoming {
+    background: transparent;
+    color: #666;
+}
+
+.calendarDayInactive {
+    color: #ccc;
+    background: transparent;
+}
+
+// ✅ Legend boxes — specific classes
+.completedLegend {
+    background: #7FA990 !important;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.partialLegend {
+    background: #FFD54F !important;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.missedLegend {
+    background: #E57373 !important;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.upcomingLegend {
+    background: #E0E0E0 !important;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+
+
+
+// Streak Card
+.streakCard {}
+
+.streakHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.streakIcon {
+  font-size: 24px;
+}
+
+.streakTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: $color-text;
+  font-family: $font-body;
+  margin: 0;
+}
+
+.streakContent {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.streakFlame {
+  font-size: 48px;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.streakInfo {
+  flex: 1;
+}
+
+.streakDays {
+  font-size: 32px;
+  font-weight: 700;
+  color: $color-text;
+  font-family: $font-display;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.streakBest {
+  font-size: 14px;
+  color: $color-text-light;
+}
+
+.streakProgress {
+  height: 8px;
+  background: $color-border;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.streakProgressBar {
+  height: 100%;
+  background: $color-primary;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.streakDescription {
+  font-size: 13px;
+  color: $color-text-light;
+}
+
+// Days Remaining Card
+.daysRemainingHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+
+  svg {
+    opacity: 0.8;
+  }
+}
+
+.daysRemainingTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: $color-text;
+  font-family: $font-body;
+  margin: 0;
+}
+
+.daysRemainingValue {
+  font-size: 64px;
+  font-weight: 700;
+  color: $color-primary;
+  font-family: $font-display;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.daysRemainingProgress {
+  height: 8px;
+  background: $color-border;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.daysRemainingProgressBar {
+  height: 100%;
+  background: $color-primary;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.daysRemainingDescription {
+  font-size: 13px;
+  color: $color-text-light;
+}
+
+// Quote Card
+.quoteCard {
+  background: linear-gradient(135deg, $color-primary-lightest 0%, $color-primary-lighter 100%);
+  border-radius: $radius-lg;
+  padding: 48px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.6s ease-out 0.3s backwards;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    animation: rotate 30s linear infinite;
+  }
+}
+
+.quoteIcon {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.quoteText {
+  font-family: $font-display;
+  font-size: 32px;
+  font-weight: 600;
+  color: $color-primary;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+  line-height: 1.4;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
+}
+
+.quoteAuthor {
+  font-size: 16px;
+  color: $color-text-light;
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+}
+
+// Decorative background
+.decorativeBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bgShape {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+}
+
+.bgShape1 {
+  bottom: 0;
+  left: 0;
+  animation: wave 15s ease-in-out infinite;
+}
+
+.bgShape2 {
+  top: 0;
+  right: 0;
+  animation: wave 20s ease-in-out infinite reverse;
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-8px) scale(1.05);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wave {
+
+  0%,
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+
+  50% {
+    transform: translateX(-25px) translateY(-15px);
+  }
+}
