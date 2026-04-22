@@ -25,39 +25,39 @@ apiClient.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// ✅ Response interceptor — refresh token flow
+//  Response interceptor — refresh token flow
 apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
     const status = error?.response?.status;
     const originalRequest = error.config;
 
-    // ✅ 401 — token expired, try refresh
+  
     if (status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true; // infinite loop தவிர்க்க
+      originalRequest._retry = true; 
 
       try {
         const refreshToken = localStorage.getItem("refreshToken");
 
         if (!refreshToken) {
-          // refresh token இல்லை → logout
+       
           localStorage.clear();
           window.location.href = "/login";
           return Promise.reject(error);
         }
 
-        // ✅ New access token get பண்ணு
+      
         const response = await axios.post(
           `${process.env.REACT_APP_BACKEND_URL}auth/refresh`,
           { refreshToken }
         );
 
-        const newAccessToken = response.data.token; // ✅ backend AuthResponse.token
+        const newAccessToken = response.data.token; // backend AuthResponse.token
 
-        // ✅ New token save
+        //  New token save
         localStorage.setItem("token", newAccessToken);
 
-        // ✅ Original request retry
+        // Original request retry
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return apiClient(originalRequest);
 
@@ -70,7 +70,7 @@ apiClient.interceptors.response.use(
       }
     }
 
-    // ✅ 403 — forbidden → logout
+   
     if (status === 403) {
       console.log("Forbidden — logging out");
       localStorage.clear();
