@@ -227,7 +227,7 @@ const AddResolution = ({ isOpen, onClose, setIsModalOpen, onSuccess }) => {
                 isOpen={showSuccess}
                 onClose={handleSuccessClose}
                 onAddAnother={handleAddAnother}
-                onGoToDashboard={() => {        // ✅ add
+                onGoToDashboard={() => {        
                     setShowSuccess(false);
                     onClose();
                     navigate('/dashboard');

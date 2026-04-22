@@ -20,7 +20,7 @@ const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // ✅ Validation errors
+
   const [errors, setErrors] = useState({
     name: '',
     email: '',
@@ -28,7 +28,7 @@ const RegisterPage = () => {
     confirmPassword: ''
   });
 
-  // ✅ Validators
+ 
   const validateName = (value) => {
     if (!value.trim()) return 'Name is required';
     if (value.trim().length < 2) return 'Name must be at least 2 characters';
@@ -54,7 +54,7 @@ const RegisterPage = () => {
     return '';
   };
 
-  // ✅ Real-time validation on change
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -64,7 +64,7 @@ const RegisterPage = () => {
     if (name === 'email') error = validateEmail(value);
     if (name === 'password') {
       error = validatePassword(value);
-      // ✅ Also re-validate confirmPassword if already typed
+      
       if (formData.confirmPassword) {
         setErrors(prev => ({
           ...prev,
@@ -78,7 +78,7 @@ const RegisterPage = () => {
   };
 
   const handleSubmit = () => {
-    // ✅ Validate all fields before submit
+  
     const nameErr = validateName(formData.name);
     const emailErr = validateEmail(formData.email);
     const passwordErr = validatePassword(formData.password);
@@ -91,7 +91,7 @@ const RegisterPage = () => {
       confirmPassword: confirmErr
     });
 
-    if (nameErr || emailErr || passwordErr || confirmErr) return; // ✅ Stop if errors
+    if (nameErr || emailErr || passwordErr || confirmErr) return; 
 
     dispatch(
       registerUser({
@@ -118,7 +118,7 @@ const RegisterPage = () => {
     );
   };
 
-  // ✅ Enter key support
+
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') handleSubmit();
   };

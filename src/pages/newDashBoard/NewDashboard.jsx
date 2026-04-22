@@ -65,7 +65,7 @@ const NewDashboard = () => {
     }));
   };
 
-  // ✅ Calendar — use real logs from API
+
 
 
   const handleDateClick = (day, isCurrentMonth) => {
@@ -117,7 +117,7 @@ const NewDashboard = () => {
     }
 
     for (let i = 1; i <= daysInMonth; i++) {
-      // ✅ No more new Date() / toISOString()
+  
       const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
 
       let status = 'upcoming';
@@ -149,19 +149,19 @@ const NewDashboard = () => {
     if (!isCurrentMonth || status === 'inactive') return styles.calendarDayInactive;
     if (status === 'completed') return styles.calendarDayCompleted;
     if (status === 'missed') return styles.calendarDayMissed;
-    if (status === 'partial') return styles.calendarDayPartial; // ✅
+    if (status === 'partial') return styles.calendarDayPartial; 
     if (status === 'upcoming') return styles.calendarDayUpcoming;
     return styles.calendarDayInactive;
   };
 
   const calendarDays = getCalendarData();
 
-  // ✅ Progress %
+
   const progressPercent = dashboardData
     ? (dashboardData.daysCompleted / dashboardData.durationDays) * 100
     : 0;
 
-  // ✅ Loading state
+ 
   if (loading) {
     return (
       <div className={styles.dashboardApp}>
@@ -171,17 +171,17 @@ const NewDashboard = () => {
   }
 
 
-  // ✅ resolutionId parameter add பண்ணு
+ 
   const handleCheckIn = (resolutionId, status) => {
     dispatch(checkIn({
       payload: {
-        resolutionId: resolutionId, // ✅ each resolution-ஓட id
+        resolutionId: resolutionId, 
         status: status
       },
       callback: {
         success: () => {
           console.log("Check-in success!");
-          loadDashboard(); // ✅ refresh
+          loadDashboard(); 
         },
         failure: (err) => {
           console.log("Check-in error:", err);
@@ -208,7 +208,7 @@ const NewDashboard = () => {
 
       <main className={styles.mainContent}>
         <div className={styles.welcomeSection}>
-          {/* ✅ Real username */}
+
           <h1 className={styles.welcomeTitle}>
             Welcome, {dashboardData?.userName || 'User'} 👋
           </h1>
@@ -216,19 +216,19 @@ const NewDashboard = () => {
         </div>
 
         <div className={styles.contentGrid}>
-          {/* Left Column */}
+       
           <div className={styles.leftColumn}>
 
-            {/* Current Resolution Card */}
+        
             <div className={styles.resolutionCard}>
               <h2 className={styles.cardTitle}>Current Resolution</h2>
               <hr />
               {dashboardData?.resolutionTitle ? (
                 <div className={styles.resolutionContent}>
-                  {/* ✅ Real resolution title */}
+              
                   <h3 className={styles.resolutionTitle}>{dashboardData.resolutionTitle}</h3>
                   <div className={styles.resolutionActions}>
-                    {/* ✅ Real duration */}
+                  
                     <div className={styles.daysProgress}>{dashboardData.durationDays} Days</div>
                     <button className={styles.btnAddResolution} onClick={() => setIsModalOpen(true)}>
                       + Add Resolution
@@ -240,19 +240,19 @@ const NewDashboard = () => {
                       </svg>
                     </button>
                   </div>
-                  {/* ✅ Real days completed / total */}
+                 
                   <p className={styles.daysFraction}>
                     {dashboardData.daysCompleted} / {dashboardData.durationDays} Days
                   </p>
                   <button
                     className={styles.btnViewAll}
-                    onClick={() => setShowResolutionView(true)} // ✅ view modal
+                    onClick={() => setShowResolutionView(true)} 
                   >
                     More
                   </button>
                 </div>
               ) : (
-                // ✅ Empty state
+                
                 <div className={styles.emptyResolution}>
                   <p>No resolution yet!</p>
                   <button className={styles.btnAddResolution} onClick={() => setIsModalOpen(true)}>
@@ -270,7 +270,7 @@ const NewDashboard = () => {
 
               {dashboardData?.resolutions?.length > 0 ? (
                 <>
-                  {/* ✅ Max 3 மட்டும் */}
+                
                   {dashboardData.resolutions.slice(0, 3).map((res) => (
                     <div key={res.id} className={styles.checkInItem}>
                       <div className={styles.checkInContent}>
@@ -311,7 +311,7 @@ const NewDashboard = () => {
                     </div>
                   ))}
 
-                  {/* ✅ 3+ இருந்தா மட்டும் காட்டு */}
+                
                   {dashboardData.resolutions.length > 3 && (
                     <button
                       className={styles.btnViewAllCheckin}
@@ -331,13 +331,13 @@ const NewDashboard = () => {
               <h2 className={styles.cardTitle}>Overall Progress</h2>
               <div className={styles.progressBarContainer}>
                 <div className={styles.progressBarFull}>
-                  {/* ✅ Real progress % */}
+               
                   <div className={styles.progressBarFilled} style={{ width: `${progressPercent}%` }}></div>
                 </div>
                 <div className={styles.progressLegend}>
                   <div className={styles.legendItem}>
                     <span className={styles.legendDot}></span>
-                    {/* ✅ Real data */}
+                  
                     <span>{dashboardData?.daysCompleted || 0} days completed</span>
                   </div>
                   <div className={styles.legendItem}>
@@ -367,7 +367,7 @@ const NewDashboard = () => {
                   <div
                     key={index}
                     className={`${styles.calendarDay} ${getCalendarDayClass(day.status, day.isCurrentMonth)}`}
-                    onClick={() => handleDateClick(day.date, day.isCurrentMonth)} // ✅
+                    onClick={() => handleDateClick(day.date, day.isCurrentMonth)} 
                     style={{ cursor: day.isCurrentMonth ? 'pointer' : 'default' }}
                   >
                     {day.date}
@@ -502,7 +502,7 @@ const NewDashboard = () => {
         onClose={() => setShowAllResolutions(false)}
         resolutions={dashboardData?.resolutions}
         onSuccess={loadDashboard}
-        onCheckIn={(resolutionId, status) => {  // ✅ இது இருக்கா?
+        onCheckIn={(resolutionId, status) => { 
           handleCheckIn(resolutionId, status);
         }}
       />

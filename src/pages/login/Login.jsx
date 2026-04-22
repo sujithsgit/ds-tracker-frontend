@@ -14,10 +14,10 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
-  // ✅ Validation errors
+
   const [errors, setErrors] = useState({ email: '', password: '' });
 
-  // ✅ Validate email format
+ 
   const validateEmail = (value) => {
     if (!value) return 'Email is required';
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -25,14 +25,14 @@ const Login = () => {
     return '';
   };
 
-  // ✅ Validate password
+ 
   const validatePassword = (value) => {
     if (!value) return 'Password is required';
     if (value.length < 6) return 'Password must be at least 6 characters';
     return '';
   };
 
-  // ✅ Real-time validation on change
+
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
@@ -46,12 +46,12 @@ const Login = () => {
   };
 
   const handleSubmit = () => {
-    // ✅ Validate before submit
+
     const emailErr = validateEmail(email);
     const passwordErr = validatePassword(password);
     setErrors({ email: emailErr, password: passwordErr });
 
-    if (emailErr || passwordErr) return; // ✅ Stop if errors
+    if (emailErr || passwordErr) return; 
 
     const payload = {
       username: email,
@@ -82,14 +82,14 @@ const Login = () => {
         },
         error: (e) => {
           console.log(e);
-          // ✅ Wrong credentials error
+        
           setErrors(prev => ({ ...prev, email: 'Invalid email or password' }));
         }
       }
     }));
   };
 
-  // ✅ Enter key support
+  
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') handleSubmit();
   };
@@ -128,7 +128,7 @@ const Login = () => {
                       className={styles.formInput}
                     />
                   </div>
-                  {/* ✅ Error message */}
+                
                   {errors.email && (
                     <p className={styles.errorText}>⚠ {errors.email}</p>
                   )}
@@ -157,7 +157,7 @@ const Login = () => {
                       {showPassword ? <EyeOff className={styles.icon} /> : <Eye className={styles.icon} />}
                     </button>
                   </div>
-                  {/* ✅ Error message */}
+                 
                   {errors.password && (
                     <p className={styles.errorText}>⚠ {errors.password}</p>
                   )}

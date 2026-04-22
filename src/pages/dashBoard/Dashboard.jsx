@@ -77,7 +77,7 @@ const Dashboard = () => {
 
             <main className={styles.mainContent}>
                 <div className={styles.welcomeSection}>
-                    {/* ✅ Real username */}
+                 
                     <h1 className={styles.welcomeTitle}>
                         Welcome, {dashboardData?.userName || 'User'} 👋
                     </h1>
@@ -113,7 +113,7 @@ const Dashboard = () => {
                         You haven't created any resolution yet.
                     </p>
 
-                    {/* ✅ checkandallow function */}
+                  
                     <button className={styles.btnCreate} onClick={checkandallow}>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M10 4V16M4 10H16" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
